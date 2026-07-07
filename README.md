@@ -14,6 +14,8 @@ A full-stack CRUD application for managing customer data along with their family
 - [PHP](https://www.php.net/downloads) 8.0–8.2 (Laravel 9 does not support PHP 8.3+) and [Composer](https://getcomposer.org/)
 - [Laravel installer](https://laravel.com/docs/9.x/installation)
 
+> If your default `php` is a newer version (check with `php --version`), install PHP 8.2 separately, e.g. on Mac: `brew install php@8.2`, then run `composer`/`artisan` commands with the full path: `/opt/homebrew/opt/php@8.2/bin/php`.
+
 ---
 
 ## 1. Database Setup
@@ -90,6 +92,8 @@ cd laravel-frontend
 composer install
 ```
 
+> If `php --version` isn't 8.0–8.2, use the full path instead, e.g. `/opt/homebrew/opt/php@8.2/bin/php /opt/homebrew/bin/composer install`.
+
 Create/update `.env` in `laravel-frontend/` and add:
 
 ```
@@ -105,11 +109,15 @@ Generate the app key if not already set:
 php artisan key:generate
 ```
 
+> Same note as above — use the full PHP 8.2 path if needed: `/opt/homebrew/opt/php@8.2/bin/php artisan key:generate`.
+
 Run the server:
 
 ```bash
 php artisan serve
 ```
+
+> Or with explicit PHP 8.2: `/opt/homebrew/opt/php@8.2/bin/php artisan serve`.
 
 Visit **http://127.0.0.1:8000** in your browser. You should see the Customer Management page.
 
