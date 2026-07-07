@@ -57,8 +57,8 @@ func (r *CustomerRepository) GetByID(id int) (*entity.Customer, error) {
 	return &c, nil
 }
 
-func (r *CustomerRepository) Update(c entity.Customer) error {
-	_, err := r.db.Exec(
+func (r *CustomerRepository) Update(tx *sql.Tx, c entity.Customer) error {
+	_, err := tx.Exec(
 		`UPDATE customer SET nationality_id=$1, cst_name=$2, cst_dob=$3, cst_phoneNum=$4, cst_email=$5 WHERE cst_id=$6`,
 		c.NationalityID, c.CstName, c.CstDob, c.CstPhoneNum, c.CstEmail, c.CstID,
 	)
