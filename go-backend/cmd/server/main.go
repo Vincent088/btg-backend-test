@@ -35,7 +35,10 @@ func main() {
 	customerHandler := deliveryhttp.NewCustomerHandler(customerUsecase)
 	nationalityHandler := deliveryhttp.NewNationalityHandler(nationalityUsecase)
 
-	router := deliveryhttp.NewRouter(customerHandler, nationalityHandler)
+	apiKey := os.Getenv("API_KEY")
+	allowedOrigin := os.Getenv("ALLOWED_ORIGIN")
+
+	router := deliveryhttp.NewRouter(customerHandler, nationalityHandler, apiKey, allowedOrigin)
 
 	log.Println("🚀 Server running on http://localhost:8080")
 	log.Fatal(http.ListenAndServe(":8080", router))
