@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Http;
 class CustomerController extends Controller
 {
     protected string $apiUrl;
+    protected string $apiKey;
+
 
     public function __construct()
     {
