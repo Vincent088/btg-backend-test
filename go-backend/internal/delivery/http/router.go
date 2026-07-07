@@ -4,7 +4,7 @@ import (
 	"github.com/gorilla/mux"
 )
 
-func NewRouter(customerHandler *CustomerHandler) *mux.Router {
+func NewRouter(customerHandler *CustomerHandler, nationalityHandler *NationalityHandler) *mux.Router {
 	r := mux.NewRouter()
 
 	api := r.PathPrefix("/api").Subrouter()
@@ -14,6 +14,8 @@ func NewRouter(customerHandler *CustomerHandler) *mux.Router {
 	api.HandleFunc("/customers/{id}", customerHandler.GetByID).Methods("GET")
 	api.HandleFunc("/customers/{id}", customerHandler.Update).Methods("PUT")
 	api.HandleFunc("/customers/{id}", customerHandler.Delete).Methods("DELETE")
+
+	api.HandleFunc("/nationalities", nationalityHandler.GetAll).Methods("GET")
 
 	return r
 }

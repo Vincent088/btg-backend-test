@@ -30,9 +30,12 @@ func main() {
 	nationalityRepo := repository.NewNationalityRepository(db)
 
 	customerUsecase := usecase.NewCustomerUsecase(customerRepo, familyRepo, nationalityRepo)
+	nationalityUsecase := usecase.NewNationalityUsecase(nationalityRepo)
 
 	customerHandler := deliveryhttp.NewCustomerHandler(customerUsecase)
-	router := deliveryhttp.NewRouter(customerHandler)
+	nationalityHandler := deliveryhttp.NewNationalityHandler(nationalityUsecase)
+
+	router := deliveryhttp.NewRouter(customerHandler, nationalityHandler)
 
 	log.Println("🚀 Server running on http://localhost:8080")
 	log.Fatal(http.ListenAndServe(":8080", router))

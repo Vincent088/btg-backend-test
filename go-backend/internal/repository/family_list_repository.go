@@ -32,7 +32,7 @@ func (r *FamilyListRepository) GetByCustomerID(cstID int) ([]entity.FamilyList, 
 	}
 	defer rows.Close()
 
-	var list []entity.FamilyList
+	list := []entity.FamilyList{}
 	for rows.Next() {
 		var f entity.FamilyList
 		if err := rows.Scan(&f.FlID, &f.CstID, &f.FlRelation, &f.FlName, &f.FlDob); err != nil {

@@ -21,7 +21,7 @@ func (r *NationalityRepository) GetAll() ([]entity.Nationality, error) {
 	}
 	defer rows.Close()
 
-	var list []entity.Nationality
+	list := []entity.Nationality{}
 	for rows.Next() {
 		var n entity.Nationality
 		if err := rows.Scan(&n.NationalityID, &n.NationalityName, &n.NationalityCode); err != nil {

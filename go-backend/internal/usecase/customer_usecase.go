@@ -75,6 +75,10 @@ func (u *CustomerUsecase) GetAllCustomers() ([]entity.Customer, error) {
 		return nil, err
 	}
 
+	if customers == nil {
+		customers = []entity.Customer{}
+	}
+
 	for i := range customers {
 		nat, err := u.nationalityRepo.GetByID(customers[i].NationalityID)
 		if err == nil {
