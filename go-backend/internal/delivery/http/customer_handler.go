@@ -36,9 +36,14 @@ func (h *CustomerHandler) Create(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	if c.NationalityID == 0 || c.CstName == "" || c.CstEmail == "" {
+		respondError(w, http.StatusBadRequest, "nationality_id, cst_name, and cst_email are required")
+		return
+	}
+
 	id, err := h.usecase.CreateCustomerWithFamily(c)
 	if err != nil {
-		respondError(w, http.StatusInternalServerError, err.Error())
+		respondError(w, http.StatusBadRequest, "failed to create customer — check that nationality_id exists and all fields are valid")
 		return
 	}
 
