@@ -1,0 +1,28 @@
+cat > .gitignore << 'EOF'
+# Go
+go-backend/*.exe
+go-backend/*.dll
+go-backend/*.so
+go-backend/*.dylib
+go-backend/*.test
+go-backend/*.out
+go-backend/vendor/
+
+# Laravel
+laravel-frontend/vendor/
+laravel-frontend/node_modules/
+laravel-frontend/.env
+laravel-frontend/storage/*.key
+laravel-frontend/public/hot
+laravel-frontend/public/storage
+laravel-frontend/storage/app/*
+laravel-frontend/storage/framework/cache/*
+laravel-frontend/storage/framework/sessions/*
+laravel-frontend/storage/framework/views/*
+laravel-frontend/storage/logs/*
+
+# General
+.DS_Store
+.idea/
+.vscode/
+EOF
