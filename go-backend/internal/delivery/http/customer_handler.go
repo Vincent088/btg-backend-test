@@ -90,8 +90,13 @@ func (h *CustomerHandler) Update(w http.ResponseWriter, r *http.Request) {
 	}
 	c.CstID = id
 
+	if c.NationalityID == 0 || c.CstName == "" || c.CstEmail == "" {
+		respondError(w, http.StatusBadRequest, "nationality_id, cst_name, and cst_email are required")
+		return
+	}
+
 	if err := h.usecase.UpdateCustomerWithFamily(c); err != nil {
-		respondError(w, http.StatusInternalServerError, err.Error())
+		respondError(w, http.StatusBadRequest, "failed to update customer — check that nationality_id exists and all fields are valid")
 		return
 	}
 
