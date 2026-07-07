@@ -3,6 +3,8 @@ module github.com/Vincent088/btg-backend-test/go-backend
 go 1.26.4
 
 require (
-	github.com/gorilla/mux v1.8.1 // indirect
-	github.com/lib/pq v1.12.3 // indirect
+	github.com/gorilla/mux v1.8.1
+	github.com/lib/pq v1.12.3
 )
+
+require github.com/joho/godotenv v1.5.1
