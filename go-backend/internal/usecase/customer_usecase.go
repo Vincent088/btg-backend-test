@@ -94,12 +94,13 @@ func (u *CustomerUsecase) GetAllCustomers() ([]entity.Customer, error) {
 }
 
 func (u *CustomerUsecase) UpdateCustomerWithFamily(c entity.Customer) error {
-	if err := u.customerRepo.Update(c); err != nil {
+	tx, err := u.customerRepo.BeginTx()
+	if err != nil {
 		return err
 	}
 
-	tx, err := u.customerRepo.BeginTx()
-	if err != nil {
+	if err := u.customerRepo.Update(tx, c); err != nil {
+		tx.Rollback()
 		return err
 	}
 
