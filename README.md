@@ -11,8 +11,8 @@ A full-stack CRUD application for managing customer data along with their family
 
 - [Go](https://go.dev/dl/) 1.21+
 - [PostgreSQL](https://www.postgresql.org/download/) 14+
-- [PHP](https://www.php.net/downloads) 8.1+ and [Composer](https://getcomposer.org/)
-- [Laravel installer](https://laravel.com/docs/installation)
+- [PHP](https://www.php.net/downloads) 8.0–8.2 (Laravel 9 does not support PHP 8.3+) and [Composer](https://getcomposer.org/)
+- [Laravel installer](https://laravel.com/docs/9.x/installation)
 
 ---
 
