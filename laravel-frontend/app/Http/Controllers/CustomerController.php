@@ -12,11 +12,17 @@ class CustomerController extends Controller
     public function __construct()
     {
         $this->apiUrl = config('services.go_api.url');
+        $this->apiKey = config('services.go_api.key');
+    }
+
+    private function client()
+    {
+        return Http::withHeaders(['X-API-Key' => $this->apiKey]);
     }
 
     public function index()
     {
-        $response = Http::get("{$this->apiUrl}/customers");
+        $response = $this->client()->get("{$this->apiUrl}/customers");
         $customers = $response->successful() ? ($response->json() ?? []) : [];
 
         return view('customers.index', compact('customers'));
@@ -56,7 +62,7 @@ class CustomerController extends Controller
 
         $payload = $this->buildPayload($request);
 
-        $response = Http::post("{$this->apiUrl}/customers", $payload);
+        $response = $this->client()->post("{$this->apiUrl}/customers", $payload);
 
         if ($response->failed()) {
             return back()->withInput()->withErrors(['error' => 'Failed to create customer: ' . $response->body()]);
@@ -67,7 +73,7 @@ class CustomerController extends Controller
 
     public function edit($id)
     {
-        $response = Http::get("{$this->apiUrl}/customers/{$id}");
+        $response = $this->client()->get("{$this->apiUrl}/customers/{$id}");
 
         if ($response->failed()) {
             return redirect()->route('customers.index')->withErrors(['error' => 'Customer not found.']);
@@ -106,7 +112,7 @@ class CustomerController extends Controller
 
         $payload = $this->buildPayload($request);
 
-        $response = Http::put("{$this->apiUrl}/customers/{$id}", $payload);
+        $response = $this->client()->put("{$this->apiUrl}/customers/{$id}", $payload);
 
         if ($response->failed()) {
             return back()->withInput()->withErrors(['error' => 'Failed to update customer: ' . $response->body()]);
@@ -117,7 +123,7 @@ class CustomerController extends Controller
 
     public function destroy($id)
     {
-        $response = Http::delete("{$this->apiUrl}/customers/{$id}");
+        $response = $this->client()->delete("{$this->apiUrl}/customers/{$id}");
 
         if ($response->failed()) {
             return back()->withErrors(['error' => 'Failed to delete customer.']);
@@ -128,7 +134,7 @@ class CustomerController extends Controller
 
     private function getNationalities(): array
     {
-        $response = Http::get("{$this->apiUrl}/nationalities");
+        $response = $this->client()->get("{$this->apiUrl}/nationalities");
         return $response->successful() ? ($response->json() ?? []) : [];
     }
 

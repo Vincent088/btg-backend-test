@@ -16,6 +16,7 @@ return [
 
     'go_api' => [
         'url' => env('GO_API_URL', 'http://localhost:8080/api'),
+        'key' => env('GO_API_KEY')
     ],
 
     'postmark' => [
