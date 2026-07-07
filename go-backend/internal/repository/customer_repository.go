@@ -2,6 +2,7 @@ package repository
 
 import (
 	"database/sql"
+	"strings"
 
 	"github.com/Vincent088/btg-backend-test/go-backend/internal/entity"
 )
@@ -37,6 +38,7 @@ func (r *CustomerRepository) GetAll() ([]entity.Customer, error) {
 		if err := rows.Scan(&c.CstID, &c.NationalityID, &c.CstName, &c.CstDob, &c.CstPhoneNum, &c.CstEmail); err != nil {
 			return nil, err
 		}
+		c.CstName = strings.TrimSpace(c.CstName)
 		list = append(list, c)
 	}
 	return list, nil
@@ -51,6 +53,7 @@ func (r *CustomerRepository) GetByID(id int) (*entity.Customer, error) {
 	if err != nil {
 		return nil, err
 	}
+	c.CstName = strings.TrimSpace(c.CstName)
 	return &c, nil
 }
 
