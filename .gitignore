@@ -7,6 +7,7 @@ go-backend/*.dylib
 go-backend/*.test
 go-backend/*.out
 go-backend/vendor/
+go-backend/.env
 
 # Laravel
 laravel-frontend/vendor/
